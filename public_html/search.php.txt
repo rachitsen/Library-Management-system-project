@@ -1,0 +1,86 @@
+<?php
+error_reporting(0);
+$emaili=$_SESSION['email'];
+include 'css.php';
+
+?>
+
+<style>
+	td{
+		padding: 5px;
+	}
+	
+input[type=text] {
+  width: 220px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 100%;
+}
+</style>
+<?php
+echo $emili;
+if($emaili=='admin@user.com')
+        include 'admin.php';
+      else if($emaili=='')
+        { header('location:login.php');}
+      else
+        include 'nonadmin.php';
+
+include 'connection.php';
+error_reporting(0);?>
+<div style="text-align:center">
+<form method="POST">
+  <input type="text" name="search" placeholder="Search Book Here..">
+</form>
+</div>
+<?php
+
+$search=$_POST["search"];
+$query = "SELECT * FROM books WHERE (category LIKE '%$search%') || (bookname LIKE '%$search%')";
+$data = mysqli_query($conn,$query);
+$total=mysqli_num_rows($data);
+if($total!=0)
+{
+	?>
+       <table class="table">
+       	<tr>
+       		<th>Sno</th>
+       		<th>Category</th>
+       		<th>Bookname</th>
+          <th>Quantity</th>
+        <th>Available</th>
+       	</tr>
+     
+	<?php
+
+	while($result=mysqli_fetch_assoc($data))
+	 {
+	 	
+       echo "<tr>
+       <td>".$result['sno']."</td>
+       <td>".$result['category']."</td>
+       <td>".$result['bookname']."</td>
+       <td>".$result['quantity']."</td>
+       <td>".$result['status']."</td>
+       </tr>";
+	 }
+}
+else
+{
+	echo "no record";
+}
+?>
+  </table>
+ 

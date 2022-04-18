@@ -1,0 +1,70 @@
+<?php 
+$emaili=$_SESSION['email'];
+if ($emaili=='admin@user.com')
+{
+  header('location:login.php');
+}
+else 
+  {
+    
+  }
+ ?>
+
+<?php
+include 'connection.php';
+include 'nonadmin.php';
+   $query = "SELECT * FROM user WHERE email='$emaili'";
+   $data=mysqli_query($conn, $query);
+   $result=mysqli_fetch_assoc($data);
+   $name=$result['name'];
+   $contact=$result['contact'];
+   $email=$result['email'];
+   $password=$result['password'];
+  ?>
+  <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 2px 0;
+}
+
+img.avatar {
+  width: 20%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 7px;
+}
+
+
+}
+</style>
+</head>
+<body>
+
+<h1>Profile</h1>
+
+<form action="/action_page.php" method="post">
+  <div class="imgcontainer">
+    <img src="/background/p1.jpg" class="avatar">
+  </div>
+
+  <div class="container" style="text-align:center">
+   <h2>NAME=<?PHP echo $name; ?></h2>
+   <h2>E-MAIL=<?PHP echo $email;?></h2>
+   <h2>CONTACT=<?PHP echo $contact; ?><?PHP ?></h2>
+   <h2>PASSWORD=<?PHP echo $password;?></h2>
+  </div>
+
+  
+</form>
+
+</body>
+</html>
+ 

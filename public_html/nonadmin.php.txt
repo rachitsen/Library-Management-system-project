@@ -1,0 +1,110 @@
+<html>
+    
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+img {
+  border-radius: 50%;
+}
+</style>
+<style>
+.a {
+  text-align: right;
+}
+</style>
+<style>
+.button {
+  background-color: black; 
+  border: none;
+  color: white;
+  padding: 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+
+.button1 {border-radius: 12px;}
+
+</style>
+    </head>
+    <body>
+        <img src="\background\p1.jpg" style="width:20px">
+    </body>
+</html>
+<?php 
+//include 'connection.php';
+echo "<strong>welcome ".$_SESSION['email']."</strong>";
+$emaili=$_SESSION['email'];
+if ($emaili=='admin@user.com')
+{
+  header('location:login.php');
+}
+else 
+  {
+    
+  }
+ ?>
+
+<?php
+include 'connection.php';
+   $query = "SELECT * FROM user WHERE email='$emaili'";
+   $data=mysqli_query($conn, $query);
+   $result=mysqli_fetch_assoc($data);
+  ?>
+  <div class="a"><a href="logout.php"><button class="button button1 ">LOGOUT</button></a></div>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body{background-color:#FFEFD5;};
+</style>
+  </head>
+
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #75A1D0;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 116px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color:#A9CCE3;
+}
+
+.active {
+  background-color: #154360;
+}
+</style>
+
+<body >
+
+<ul>
+  <li><a class="active" href="nonadmin.php">HOME</a></li>
+  <li><a href="search.php">SEARCH BOOK</a></li>
+  <li><a href="profile.php">PROFILE</a></li>
+  <li><a href="comment.php">FEEDBACK</a></li>
+</ul>
+<h1 align=center>welcome to library management system system</h1>
+</body>
+</html>
+  

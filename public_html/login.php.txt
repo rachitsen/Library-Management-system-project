@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <style>
+             
+            div.c {
+  text-align: left;
+
+} 
+        </style>
+    </head>
+    <body>
+        <div class="c">
+<h2><a href="index.php">HOME</a></h2>
+</div>
+    </body>
+</html>
+<?php 
+include 'css.php';
+ ?>
+ <div class="bg-img">
+  <form action="" method="post" class="container">
+    <h1>Login</h1>
+
+    <label><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
+
+    <button type="submit" name="submit" class="btn">Login</button>
+    <h5 style=text-align: center><b>Don't have accoute <a href="register.php">Register here</a></b></h5>
+  </form>
+</div>
+
+<?php  
+include 'connection.php';
+if(isset($_POST["email"]))
+{
+   $email=$_POST["email"];
+   $pass=$_POST["password"];
+   $query = "SELECT * FROM user WHERE email='$email' and password='$pass'";
+   $data=mysqli_query($conn,$query);
+   $total=mysqli_num_rows($data);
+   if($total==1)
+      {
+        $_SESSION['email']=$email;
+        if($email=='admin@user.com')
+        {header('location:admin.php');}
+      else
+        {header('location:nonadmin.php');}
+      }
+      else
+        {
+          echo "login fail";
+        }
+}
+
+?> 
